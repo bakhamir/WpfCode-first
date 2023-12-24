@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace WpfApp
 {
@@ -10,292 +9,303 @@ namespace WpfApp
     {
         public MainWindow()
         {
+            InitializeComponent();
             InitializeUI();
         }
 
         private void InitializeUI()
         {
-            // Создание Grid
             var grid = new Grid();
-            this.Content = grid;
-
-            // Добавление строк и колонок в Grid
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-
-            // Создание TextBox для ввода числа (Задача 1)
-            var inputTextBox1 = CreateTextBox();
-            Grid.SetRow(inputTextBox1, 0);
-            Grid.SetColumn(inputTextBox1, 0);
-            Grid.SetColumnSpan(inputTextBox1, 2);
-
-            // Создание Button для проверки числа на простоту (Задача 1)
-            var checkPrimeButton = CreateButton("Проверить простое число", CheckPrimeButton_Click);
-            Grid.SetRow(checkPrimeButton, 1);
-            Grid.SetColumn(checkPrimeButton, 0);
-            Grid.SetColumnSpan(checkPrimeButton, 2);
-
-            // Создание Label для вывода результата (Задача 1)
-            var resultLabel1 = CreateLabel();
-            Grid.SetRow(resultLabel1, 2);
-            Grid.SetColumn(resultLabel1, 0);
-            Grid.SetColumnSpan(resultLabel1, 2);
-
-            // Создание TextBox для ввода строки (Задача 2)
-            var inputTextBox2 = CreateTextBox();
-            Grid.SetRow(inputTextBox2, 3);
-            Grid.SetColumn(inputTextBox2, 0);
-            Grid.SetColumnSpan(inputTextBox2, 2);
-
-            // Создание ComboBox для выбора действия (Задача 2)
-            var countComboBox = CreateComboBox(new string[] { "Гласные", "Согласные", "Цифры", "Слова" });
-            Grid.SetRow(countComboBox, 4);
-            Grid.SetColumn(countComboBox, 0);
-            Grid.SetColumnSpan(countComboBox, 2);
-
-            // Создание Button для выполнения действия (Задача 2)
-            var countCharactersButton = CreateButton("Выполнить", CountCharactersButton_Click);
-            Grid.SetRow(countCharactersButton, 5);
-            Grid.SetColumn(countCharactersButton, 0);
-            Grid.SetColumnSpan(countCharactersButton, 2);
-
-            // Создание Label для вывода результата (Задача 2)
-            var resultLabel2 = CreateLabel();
-            Grid.SetRow(resultLabel2, 6);
-            Grid.SetColumn(resultLabel2, 0);
-            Grid.SetColumnSpan(resultLabel2, 2);
-
-            // Создание CheckBox для выбора символов в пароле (Задача 3)
-            var useLettersCheckBox = CreateCheckBox("Использовать буквы");
-            Grid.SetRow(useLettersCheckBox, 7);
-            Grid.SetColumn(useLettersCheckBox, 0);
-
-            var useDigitsCheckBox = CreateCheckBox("Использовать цифры");
-            Grid.SetRow(useDigitsCheckBox, 7);
-            Grid.SetColumn(useDigitsCheckBox, 1);
-
-            var useSpecialCharsCheckBox = CreateCheckBox("Использовать спецсимволы");
-            Grid.SetRow(useSpecialCharsCheckBox, 8);
-            Grid.SetColumn(useSpecialCharsCheckBox, 0);
-            Grid.SetColumnSpan(useSpecialCharsCheckBox, 2);
-
-            // Создание Button для генерации пароля (Задача 3)
-            var generatePasswordButton = CreateButton("Генерировать пароль", GeneratePasswordButton_Click);
-            Grid.SetRow(generatePasswordButton, 9);
-            Grid.SetColumn(generatePasswordButton, 0);
-            Grid.SetColumnSpan(generatePasswordButton, 2);
-
-            // Создание Label для вывода результата (Задача 3)
-            var resultLabel3 = CreateLabel();
-            Grid.SetRow(resultLabel3, 10);
-            Grid.SetColumn(resultLabel3, 0);
-            Grid.SetColumnSpan(resultLabel3, 2);
-
-            // Создание TextBox для ввода первого числа (Задача 4)
-            var number1TextBox = CreateTextBox();
-            Grid.SetRow(number1TextBox, 11);
-            Grid.SetColumn(number1TextBox, 0);
-
-            // Создание TextBox для ввода второго числа (Задача 4)
-            var number2TextBox = CreateTextBox();
-            Grid.SetRow(number2TextBox, 11);
-            Grid.SetColumn(number2TextBox, 1);
-
-            // Создание RadioButton для выбора операции сложения (Задача 4)
-            var additionRadioButton = CreateRadioButton("Сложение");
-            Grid.SetRow(additionRadioButton, 12);
-            Grid.SetColumn(additionRadioButton, 0);
-
-            // Создание RadioButton для выбора операции вычитания (Задача 4)
-            var subtractionRadioButton = CreateRadioButton("Вычитание");
-            Grid.SetRow(subtractionRadioButton, 12);
-            Grid.SetColumn(subtractionRadioButton, 1);
-
-            // Создание RadioButton для выбора операции умножения (Задача 4)
-            var multiplicationRadioButton = CreateRadioButton("Умножение");
-            Grid.SetRow(multiplicationRadioButton, 13);
-            Grid.SetColumn(multiplicationRadioButton, 0);
-
-            // Создание RadioButton для выбора операции деления (Задача 4)
-            var divisionRadioButton = CreateRadioButton("Деление");
-            Grid.SetRow(divisionRadioButton, 13);
-            Grid.SetColumn(divisionRadioButton, 1);
-
-            // Создание Button для выполнения операции (Задача 4)
-            var calculateButton = CreateButton("Выполнить операцию", CalculateButton_Click);
-            Grid.SetRow(calculateButton, 14);
-            Grid.SetColumn(calculateButton, 0);
-            Grid.SetColumnSpan(calculateButton, 2);
-
-            // Создание TextBox для ввода шести чисел (Задача 5)
-            var inputTextBox3 = CreateTextBox();
-            Grid.SetRow(inputTextBox3, 15);
-            Grid.SetColumn(inputTextBox3, 0);
-            Grid.SetColumnSpan(inputTextBox3, 2);
-
-            // Создание Button для выполнения действий (Задача 5)
-            var performActionButton1 = CreateButton("Действие 1", PerformActionButton_Click);
-            Grid.SetRow(performActionButton1, 16);
-            Grid.SetColumn(performActionButton1, 0);
-
-            var performActionButton2 = CreateButton("Действие 2", PerformActionButton_Click);
-            Grid.SetRow(performActionButton2, 16);
-            Grid.SetColumn(performActionButton2, 1);
-
-            // Добавление элементов в Grid
-            grid.Children.Add(inputTextBox1);
-            grid.Children.Add(checkPrimeButton);
-            grid.Children.Add(resultLabel1);
-            grid.Children.Add(inputTextBox2);
-            grid.Children.Add(countComboBox);
-            grid.Children.Add(countCharactersButton);
-            grid.Children.Add(resultLabel2);
-            grid.Children.Add(useLettersCheckBox);
-            grid.Children.Add(useDigitsCheckBox);
-            grid.Children.Add(useSpecialCharsCheckBox);
-            grid.Children.Add(generatePasswordButton);
-            grid.Children.Add(resultLabel3);
-            grid.Children.Add(number1TextBox);
-            grid.Children.Add(number2TextBox);
-            grid.Children.Add(additionRadioButton);
-            grid.Children.Add(subtractionRadioButton);
-            grid.Children.Add(multiplicationRadioButton);
-            grid.Children.Add(divisionRadioButton);
-            grid.Children.Add(calculateButton);
-            grid.Children.Add(inputTextBox3);
-            grid.Children.Add(performActionButton1);
-            grid.Children.Add(performActionButton2);
-
-            // Установка Margin
-            foreach (UIElement element in grid.Children)
+            for (int i = 0; i < 17; i++)
             {
-                if (element is FrameworkElement frameworkElement)
-                {
-                    frameworkElement.Margin = new Thickness(5);
-                }
+                grid.RowDefinitions.Add(new RowDefinition());
             }
 
-            // Отображение окна
-            this.ShowDialog();
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            // Задача 1: Проверка на простое число
+            var inputTextBox1 = CreateTextBox();
+            var checkPrimeButton = CreateButton("Проверить простое число");
+            var resultLabel1 = CreateLabel();
+
+            checkPrimeButton.Click += (s, e) =>
+            {
+                int inputNumber;
+                if (int.TryParse(inputTextBox1.Text, out inputNumber))
+                {
+                    resultLabel1.Content = IsPrime(inputNumber) ? "Простое число" : "Не простое число";
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректное число");
+                }
+            };
+
+            PlaceInGrid(grid, inputTextBox1, 0, 0);
+            PlaceInGrid(grid, checkPrimeButton, 0, 1);
+            PlaceInGrid(grid, resultLabel1, 1, 0, 2);
+
+            // Задача 2: Подсчет символов в строке
+            var inputTextBox2 = CreateTextBox();
+            var countComboBox = CreateComboBox(new string[] { "Гласные", "Согласные", "Цифры", "Слова" });
+            var countCharactersButton = CreateButton("Выполнить");
+            var resultLabel2 = CreateLabel();
+
+            countCharactersButton.Click += (s, e) =>
+            {
+                string inputText = inputTextBox2.Text;
+                string selectedOption = countComboBox.SelectedItem as string;
+
+                if (selectedOption != null)
+                {
+                    resultLabel2.Content = CountCharacters(inputText, selectedOption).ToString();
+                }
+            };
+
+            PlaceInGrid(grid, inputTextBox2, 2, 0);
+            PlaceInGrid(grid, countComboBox, 2, 1);
+            PlaceInGrid(grid, countCharactersButton, 3, 0, 2);
+            PlaceInGrid(grid, resultLabel2, 4, 0, 2);
+
+            // Задача 3: Генерация рандомного пароля
+            var useLettersCheckBox = CreateCheckBox("Использовать буквы");
+            var useDigitsCheckBox = CreateCheckBox("Использовать цифры");
+            var useSpecialCharsCheckBox = CreateCheckBox("Использовать спецсимволы");
+            var generatePasswordButton = CreateButton("Генерировать пароль");
+            var resultLabel3 = CreateLabel();
+
+            generatePasswordButton.Click += (s, e) =>
+            {
+                int passwordLength = 8; // Длина пароля по умолчанию
+                string password = GeneratePassword(passwordLength, Convert.ToBoolean(useLettersCheckBox.IsChecked), Convert.ToBoolean(useDigitsCheckBox.IsChecked), Convert.ToBoolean(useSpecialCharsCheckBox.IsChecked));
+                resultLabel3.Content = password;
+            };
+
+            PlaceInGrid(grid, useLettersCheckBox, 5, 0);
+            PlaceInGrid(grid, useDigitsCheckBox, 5, 1);
+            PlaceInGrid(grid, useSpecialCharsCheckBox, 6, 0, 2);
+            PlaceInGrid(grid, generatePasswordButton, 7, 0, 2);
+            PlaceInGrid(grid, resultLabel3, 8, 0, 2);
+
+            // Задача 4: Выполнение арифметической операции
+            var number1TextBox = CreateTextBox();
+            var number2TextBox = CreateTextBox();
+            var additionRadioButton = CreateRadioButton("Сложение");
+            var subtractionRadioButton = CreateRadioButton("Вычитание");
+            var multiplicationRadioButton = CreateRadioButton("Умножение");
+            var divisionRadioButton = CreateRadioButton("Деление");
+            var calculateButton = CreateButton("Выполнить операцию");
+            var resultLabel4 = CreateLabel();
+
+            calculateButton.Click += (s, e) =>
+            {
+                double number1, number2;
+                if (double.TryParse(number1TextBox.Text, out number1) && double.TryParse(number2TextBox.Text, out number2))
+                {
+                    if (additionRadioButton.IsChecked == true)
+                    {
+                        resultLabel4.Content = (number1 + number2).ToString();
+                    }
+                    else if (subtractionRadioButton.IsChecked == true)
+                    {
+                        resultLabel4.Content = (number1 - number2).ToString();
+                    }
+                    else if (multiplicationRadioButton.IsChecked == true)
+                    {
+                        resultLabel4.Content = (number1 * number2).ToString();
+                    }
+                    else if (divisionRadioButton.IsChecked == true && number2 != 0)
+                    {
+                        resultLabel4.Content = (number1 / number2).ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Введите корректные числа и выберите операцию");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректные числа");
+                }
+            };
+
+            PlaceInGrid(grid, number1TextBox, 9, 0);
+            PlaceInGrid(grid, number2TextBox, 9, 1);
+            PlaceInGrid(grid, additionRadioButton, 10, 0);
+            PlaceInGrid(grid, subtractionRadioButton, 10, 1);
+            PlaceInGrid(grid, multiplicationRadioButton, 11, 0);
+            PlaceInGrid(grid, divisionRadioButton, 11, 1);
+            PlaceInGrid(grid, calculateButton, 12, 0, 2);
+            PlaceInGrid(grid, resultLabel4, 13, 0, 2);
+
+            // Задача 5: Действия с шестью числами
+            var inputTextBox3 = CreateTextBox();
+            var performActionButton1 = CreateButton("Действие 1");
+            var performActionButton2 = CreateButton("Действие 2");
+            var resultLabel5 = CreateLabel();
+
+            performActionButton1.Click += (s, e) =>
+            {
+                double inputNumber;
+                if (double.TryParse(inputTextBox3.Text, out inputNumber))
+                {
+                    resultLabel5.Content = PerformAction1(inputNumber).ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректное число");
+                }
+            };
+
+            performActionButton2.Click += (s, e) =>
+            {
+                double inputNumber;
+                if (double.TryParse(inputTextBox3.Text, out inputNumber))
+                {
+                    resultLabel5.Content = PerformAction2(inputNumber).ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректное число");
+                }
+            };
+
+            PlaceInGrid(grid, inputTextBox3, 14, 0, 2);
+            PlaceInGrid(grid, performActionButton1, 15, 0);
+            PlaceInGrid(grid, performActionButton2, 15, 1);
+            PlaceInGrid(grid, resultLabel5, 16, 0, 2);
+            grid.HorizontalAlignment = HorizontalAlignment.Center;
+            grid.VerticalAlignment = VerticalAlignment.Center;
+            this.Content = grid;
         }
 
-        // Метод для проверки на простое число (Задача 1)
-        private void CheckPrimeButton_Click(object sender, RoutedEventArgs e)
+        private TextBox CreateTextBox()
         {
-            if (int.TryParse(inputTextBox1.Text, out int number))
+            return new TextBox
             {
-                bool isPrime = IsPrime(number);
-                resultLabel1.Content = isPrime ? "Простое число" : "Не простое число";
-            }
-            else
+                Width = 200,
+                Height = 30,
+                Margin = new Thickness(10)
+            };
+        }
+
+        private Button CreateButton(string content)
+        {
+            var button = new Button
             {
-                resultLabel1.Content = "Введите корректное число";
-            }
+                Width = 150,
+                Height = 30,
+                Content = content,
+                Margin = new Thickness(10)
+            };
+            return button;
+        }
+
+        private Label CreateLabel()
+        {
+            return new Label
+            {
+                Content = "",
+                Margin = new Thickness(10)
+            };
+        }
+
+        private ComboBox CreateComboBox(string[] items)
+        {
+            var comboBox = new ComboBox
+            {
+                Width = 150,
+                Height = 30,
+                Margin = new Thickness(10),
+                ItemsSource = items
+            };
+            return comboBox;
+        }
+
+        private CheckBox CreateCheckBox(string content)
+        {
+            return new CheckBox
+            {
+                Content = content,
+                Margin = new Thickness(10)
+            };
+        }
+
+        private RadioButton CreateRadioButton(string content)
+        {
+            return new RadioButton
+            {
+                Content = content,
+                Margin = new Thickness(10)
+            };
+        }
+
+        private void PlaceInGrid(Grid grid, UIElement element, int row, int column, int columnSpan = 1)
+        {
+            Grid.SetRow(element, row);
+            Grid.SetColumn(element, column);
+            Grid.SetColumnSpan(element, columnSpan);
+            grid.Children.Add(element);
         }
 
         private bool IsPrime(int number)
         {
-            if (number < 2) return false;
+            if (number < 2)
+                return false;
+
             for (int i = 2; i <= Math.Sqrt(number); i++)
             {
-                if (number % i == 0) return false;
+                if (number % i == 0)
+                    return false;
             }
             return true;
         }
 
-        // Метод для подсчета символов в строке (Задача 2)
-        private void CountCharactersButton_Click(object sender, RoutedEventArgs e)
+        private int CountCharacters(string input, string option)
         {
-            string input = inputTextBox2.Text;
-            string selectedOption = ((ComboBoxItem)countComboBox.SelectedItem).Content.ToString();
-
-            switch (selectedOption)
+            switch (option)
             {
                 case "Гласные":
-                    resultLabel2.Content = CountVowels(input);
-                    break;
+                    return input.Count(c => "aeiouAEIOUаеёиоуыэюяАЕЁИОУЫЭЮЯ".Contains(c));
                 case "Согласные":
-                    resultLabel2.Content = CountConsonants(input);
-                    break;
+                    return input.Count(c => "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZбвгджзйклмнпрстфхцчшщБВГДЖЗЙКЛМНПРСТФХЦЧШЩ".Contains(c));
                 case "Цифры":
-                    resultLabel2.Content = CountDigits(input);
-                    break;
+                    return input.Count(c => char.IsDigit(c));
                 case "Слова":
-                    resultLabel2.Content = CountWords(input);
-                    break;
+                    return input.Split(new char[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+                default:
+                    return 0;
             }
-        }
-
-        private int CountVowels(string input) => input.Count(c => "aeiouAEIOU".Contains(c));
-
-        private int CountConsonants(string input) => input.Count(c => char.IsLetter(c) && !"aeiouAEIOU".Contains(c));
-
-        private int CountDigits(string input) => input.Count(char.IsDigit);
-
-        private int CountWords(string input) => input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
-
-        // Метод для генерации пароля (Задача 3)
-        private void GeneratePasswordButton_Click(object sender, RoutedEventArgs e)
-        {
-            string password = GeneratePassword(10, useLettersCheckBox.IsChecked == true, useDigitsCheckBox.IsChecked == true, useSpecialCharsCheckBox.IsChecked == true);
-            resultLabel3.Content = password;
         }
 
         private string GeneratePassword(int length, bool useLetters, bool useDigits, bool useSpecialChars)
         {
-            string chars = "";
-            if (useLetters) chars += "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            if (useDigits) chars += "0123456789";
-            if (useSpecialChars) chars += "!@#$%^&*()_+-=[]{}|;:'\",.<>/?";
+            const string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string digits = "0123456789";
+            const string specialChars = "!@#$%^&*()-=_+[]{}|;:'\",.<>/?";
+
+            string validChars = "";
+            if (useLetters)
+                validChars += letters;
+            if (useDigits)
+                validChars += digits;
+            if (useSpecialChars)
+                validChars += specialChars;
 
             Random random = new Random();
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+            return new string(Enumerable.Repeat(validChars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        // Метод для выполнения операции с двумя числами (Задача 4)
-        private void CalculateButton_Click(object sender, RoutedEventArgs e)
+        private double PerformAction1(double number)
         {
-            if (double.TryParse(number1TextBox.Text, out double num1) && double.TryParse(number2TextBox.Text, out double num2))
-            {
-                string operation = "";
-                if (additionRadioButton.IsChecked == true)
-                    operation = "Сложение";
-                else if (subtractionRadioButton.IsChecked == true)
-                    operation = "Вычитание";
-                else if (multiplicationRadioButton.IsChecked == true)
-                    operation = "Умножение";
-                else if (divisionRadioButton.IsChecked == true)
-                    operation = "Деление";
-
-                double result = PerformOperation(num1, num2, operation);
-                MessageBox.Show($"Результат {operation}: {result}");
-            }
-            else
-            {
-            {
-                MessageBox.Show("Введите корректные числа");
-            }
+            return number * 2;
         }
 
-        private double PerformOperation(double num1, double num2, string operation)
+        private double PerformAction2(double number)
         {
-            switch (operation)
-            {
-                case "Сложение":
-                    return num1 + num2;
-                case "Вычитание":
-                    return num1 - num2;
-                case "Умножение":
-                    return num1 * num2;
-                case "Деление":
-                    return num1 / num2;
-                default:
-                    throw new ArgumentException("Недопустимая операция");
-            }
+            return Math.Pow(number, 2);
         }
+    }
+}
