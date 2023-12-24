@@ -24,7 +24,7 @@ namespace WpfApp
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            // Задача 1: Проверка на простое число
+
             var inputTextBox1 = CreateTextBox();
             var checkPrimeButton = CreateButton("Проверить простое число");
             var resultLabel1 = CreateLabel();
@@ -46,7 +46,7 @@ namespace WpfApp
             PlaceInGrid(grid, checkPrimeButton, 0, 1);
             PlaceInGrid(grid, resultLabel1, 1, 0, 2);
 
-            // Задача 2: Подсчет символов в строке
+
             var inputTextBox2 = CreateTextBox();
             var countComboBox = CreateComboBox(new string[] { "Гласные", "Согласные", "Цифры", "Слова" });
             var countCharactersButton = CreateButton("Выполнить");
@@ -68,7 +68,7 @@ namespace WpfApp
             PlaceInGrid(grid, countCharactersButton, 3, 0, 2);
             PlaceInGrid(grid, resultLabel2, 4, 0, 2);
 
-            // Задача 3: Генерация рандомного пароля
+
             var useLettersCheckBox = CreateCheckBox("Использовать буквы");
             var useDigitsCheckBox = CreateCheckBox("Использовать цифры");
             var useSpecialCharsCheckBox = CreateCheckBox("Использовать спецсимволы");
@@ -77,7 +77,7 @@ namespace WpfApp
 
             generatePasswordButton.Click += (s, e) =>
             {
-                int passwordLength = 8; // Длина пароля по умолчанию
+                int passwordLength = 8; 
                 string password = GeneratePassword(passwordLength, Convert.ToBoolean(useLettersCheckBox.IsChecked), Convert.ToBoolean(useDigitsCheckBox.IsChecked), Convert.ToBoolean(useSpecialCharsCheckBox.IsChecked));
                 resultLabel3.Content = password;
             };
@@ -88,7 +88,7 @@ namespace WpfApp
             PlaceInGrid(grid, generatePasswordButton, 7, 0, 2);
             PlaceInGrid(grid, resultLabel3, 8, 0, 2);
 
-            // Задача 4: Выполнение арифметической операции
+
             var number1TextBox = CreateTextBox();
             var number2TextBox = CreateTextBox();
             var additionRadioButton = CreateRadioButton("Сложение");
@@ -139,7 +139,6 @@ namespace WpfApp
             PlaceInGrid(grid, calculateButton, 12, 0, 2);
             PlaceInGrid(grid, resultLabel4, 13, 0, 2);
 
-            // Задача 5: Действия с шестью числами
             var inputTextBox3 = CreateTextBox();
             var performActionButton1 = CreateButton("Действие 1");
             var performActionButton2 = CreateButton("Действие 2");
